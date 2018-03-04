@@ -174,7 +174,6 @@
                    }
                    this.comment = res[3].data;
                 }
-                console.log(res)
              })
           },
           selectEmoji (code) {

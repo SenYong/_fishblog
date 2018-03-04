@@ -9,6 +9,7 @@ const journal = r => require.ensure([], () => r(require('../page/journal')), 'jo
 const journalInfo = r => require.ensure([], () => r(require('../page/journalInfo')), 'journalInfo');
 const say = r => require.ensure([], () => r(require("../page/say")), 'say');
 const sayInfo = r => require.ensure([], ()=>r(require("../page/sayInfo")), 'sayInfo');
+const board = r => require.ensure([], () => r(require('../page/board')), 'board');
 
 export default new Router({
   routes: [
@@ -37,6 +38,9 @@ export default new Router({
     },{
       path: '/sayInfo',
       component: sayInfo
+    },{
+      path: '/board',
+      component: board
     }
   ]
 })

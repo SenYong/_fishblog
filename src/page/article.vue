@@ -53,7 +53,7 @@
        },
        components: {headTop, headRight},
        created(){
-          this.getData();
+          this.$route.query.id ? this.catTo(this.$route.query.id) : this.getData();
        },
        methods: { 
           async getData(){

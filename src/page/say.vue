@@ -8,7 +8,7 @@
                   <div id="list" v-if="list.length > 0"> 
                      <div class="mood" v-for="(item, index) in list">
                         <span class="tutime">{{item.s_time}}</span>
-                        <p class="p1"><a @click="sayTo(item.s_id)" class="cont">{{item.s_content}}</a></p>
+                        <p class="p1"><a style="cursor:pointer" @click="sayTo(item.s_id)" class="cont" v-html="emoji(item.s_content)"></a></p>
                         <img :src="baseUrl+item.s_img" class="sayImg" v-if="item.s_img">
                         <p class="p2"><a class="span1" href="">浏览({{item.s_hit}})</a><a class="span2" href="">评论({{item.s_num}})</a></p>
                       </div>
@@ -79,8 +79,8 @@
 
 <style>
     .sayImg{
-      width:100px;
-      height:100px;
+      width:150px;
+      height:150px;
       margin-bottom:20px;  
     }
 </style>

@@ -124,3 +124,29 @@ export const prevSay = data => fetch('s=Index/Say/prevSay', data, 'post');
  * 下一条说说
  */
 export const nextSay = data => fetch('s=Index/Say/nextSay', data, 'post');
+
+/*
+ * 获取说说的用户评论
+ */
+export const getAllSayUser = data => fetch('s=Index/Say/getAllSayUser', data, 'post');
+
+/*
+ * 日志浏览器增加
+ */
+export const addSayHit = data => fetch('s=Index/Say/addSayHit', data, 'post');
+
+/*
+ * 用户评论
+ */
+export const userSayComment = data => fetch('s=Index/Say/userSayComment', data, 'post');
+
+/*
+ * 获取留言板用户评论
+ */
+export const getUserComment = data => fetch('s=Index/Board/getUserComment', data, 'post');
+
+/*
+ * 用户留言
+ */
+export const userBoardComment = data => fetch('s=Index/Board/userBoardComment', data, 'post');
+ 

@@ -24,17 +24,17 @@
             <div class="tab-main" id="tb-main">
                 <div class="bd bd-news" v-show="navBar[0].bool">
                   <ul>
-                      <li v-for="(item, index) in art"><a href="{:U('/artinfo-'.$vo['a_id'])}">{{item.a_name}}</a></li>
+                      <li v-for="(item, index) in art"><a @click="navTo('/artInfo',item.a_id)" class="pointer">{{item.a_name}}</a></li>
                   </ul>
                 </div>
                 <div class="bd bd-news" v-show="navBar[1].bool">
                    <ul>
-                      <li v-for="(item, index) in log"><a href="{:U('/loginfo-'.$vo['l_id'])}">{{item.l_name}}</a></li>
+                      <li v-for="(item, index) in log"><a @click="navTo('/journalInfo',item.l_id)" class="pointer">{{item.l_name}}</a></li>
                   </ul>
                 </div>
                 <div class="bd bd-news" v-show="navBar[2].bool">
                    <ul>
-                      <li v-for="(item, index) in say"><a href="{:U('/sayinfo-'.$vo['s_id'])}">{{item.s_content}}</a></li>
+                      <li v-for="(item, index) in say"><a @click="navTo('/sayInfo',item.s_id)" class="pointer">{{item.s_content}}</a></li>
                    </ul>
                 </div>
             </div>
@@ -42,15 +42,15 @@
           <div class="cloud">
                <h3>标签云</h3>
                <ul>
-                  <li v-for="(item,index) in cat"><a href="{:U('/cat-'.$vo['c_id'])}">{{item.c_name}}</a></li>
+                  <li v-for="(item,index) in cat"><a @click="navTo('/article',item.c_id)" class="pointer">{{item.c_name}}</a></li>
               </ul>
           </div>
           <div class="tuwen">
              <h3>点击排行</h3>
              <ul>
-                <li v-for="(item,index) in hit"><a href="{:U('/artinfo-'.$vo['a_id'])}"><img :src="baseUrl+item.a_img"><b>{{item.a_name}}</b></a>
+                <li v-for="(item,index) in hit"><a @click="navTo('/artInfo',item.a_id)" class="pointer"><img :src="baseUrl+item.a_img"><b>{{item.a_name}}</b></a>
                    <p>
-                     <span class="tulanum"><a href="{:U('/cat-'.$vo['c_id'])}">{{item.c_name}}</a></span>
+                     <span class="tulanum"><a>{{item.c_name}}</a></span>
                      <span class="tutime">{{item.a_time}}</span>
                    </p>
                 </li>
@@ -116,7 +116,6 @@
                    }
                    this.hit = res[4].data;
                 }
-                console.log(res)
             })
         },
         change(index){
@@ -133,6 +132,9 @@
           var day = date.getDate() + ' ';
           return year + month + day;
         },
+        navTo(path,id){
+          this.$router.push({path, query:{id}})
+        }
       } 
    }
 </script>

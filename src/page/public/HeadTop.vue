@@ -8,7 +8,7 @@
          </div>
          <div id="topnav" class="f_r">
              <ul>
-                <a v-for="(item, index) in header" @click="navBarTo(item.navTo)">{{item.content}}</a>
+                <a v-for="(item, index) in header" @click="navBarTo(item.navTo,index)" class="pointer" :class="item.bool ? 'active' : '' ">{{item.content}}</a>
             </ul>
          </div>
       </header>
@@ -19,12 +19,12 @@
    export default{
       data(){
         return {
-           header: [ {navTo: 'index', content: '首页'}, {navTo: '/abouts', content: '关于我'}, {navTo: '/article', content: '技术心得'}, {navTo: '/journal', content: '抚今追昔'}, {navTo: '/say', content: '畅所欲言'}, {navTo: '/board', content: '留言'}]
+           header: [ {navTo: '/index', content: '首页', bool:true}, {navTo: '/abouts', content: '关于我', bool:false}, {navTo: '/article', content: '技术心得', bool:false}, {navTo: '/journal', content: '抚今追昔', bool:false}, {navTo: '/say', content: '畅所欲言', bool:false}, {navTo: '/board', content: '留言', bool:false}]
         }
       },
       methods:{
-        navBarTo(index){
-          this.$router.push(index)
+        navBarTo(navTo,index){
+          this.$router.push({path:navTo})
         }
       }
    }
