@@ -3,7 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const index = r => require.ensure([], () => r(require('../page/index')), 'index');
-const abouts = r => require.ensure([], () => r(require('../page/about')), 'about');
+const abouts = r => require.ensure([], () => r(require('../page/abouts')), 'abouts');
 const artInfo = r => require.ensure([], () => r(require('../page/artInfo')), 'artInfo');
 const article = r => require.ensure([], () => r(require('../page/article')), 'article');
 const journal = r => require.ensure([], () => r(require('../page/journal')), 'journal');
