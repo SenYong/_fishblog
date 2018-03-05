@@ -3,6 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const index = r => require.ensure([], () => r(require('../page/index')), 'index');
+const abouts = r => require.ensure([], () => r(require('../page/about')), 'about');
 const artInfo = r => require.ensure([], () => r(require('../page/artInfo')), 'artInfo');
 const article = r => require.ensure([], () => r(require('../page/article')), 'article');
 const journal = r => require.ensure([], () => r(require('../page/journal')), 'journal');
@@ -15,32 +16,45 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: index
+      component: index,
+      meta:[0]
     },
     {
       path: '/index',
-      component: index
+      component: index,
+      meta:[0]
+    },{
+      path: '/abouts',
+      component: abouts,
+      meta:[1]
     },{
       path: '/artInfo',
-      component: artInfo
+      component: artInfo,
+      meta:[2]
     },{
       path: '/article',
-      component: article
+      component: article,
+      meta:[2]
     },{
       path: '/journal',
-      component: journal
+      component: journal,
+      meta:[3]
     },{
       path: '/journalInfo',
-      component: journalInfo
+      component: journalInfo,
+      meta:[3]
     },{
       path:'/say',
-      component: say
+      component: say,
+      meta:[4]
     },{
       path: '/sayInfo',
-      component: sayInfo
+      component: sayInfo,
+      meta:[4]
     },{
       path: '/board',
-      component: board
+      component: board,
+      meta: [5]
     }
   ]
 })

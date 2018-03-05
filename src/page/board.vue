@@ -51,12 +51,14 @@
             </div><!--l_box f_l-->
             <head-right></head-right>
         </article>
+        <head-foot></head-foot>
     </div>
 </template>
 
 <script>
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
+    import headFoot from './public/HeadFoot';
     import vueEmoji from '../components/emoji.vue';
     import {getUserComment, userBoardComment} from '../api/getData';
     import { baseUrl } from '../config/env';
@@ -72,7 +74,7 @@
                 b_content: ''
             }
         },
-        components:{headTop, headRight, vueEmoji},
+        components:{headTop, headRight, vueEmoji, headFoot},
         created(){
             this.getData(this.num, this.page);
         },

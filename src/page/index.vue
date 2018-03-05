@@ -54,6 +54,7 @@
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
+    import headFoot from './public/HeadRight';
     import { getArticle, newArt, newLog, newSay } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
@@ -63,7 +64,7 @@
                 baseUrl
             }
         },
-        components: {headTop, headRight},
+        components: {headTop, headRight, headFoot},
         created(){
            this.init();
         },

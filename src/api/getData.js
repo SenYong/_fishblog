@@ -131,7 +131,7 @@ export const nextSay = data => fetch('s=Index/Say/nextSay', data, 'post');
 export const getAllSayUser = data => fetch('s=Index/Say/getAllSayUser', data, 'post');
 
 /*
- * 日志浏览器增加
+ * 日志浏览量增加
  */
 export const addSayHit = data => fetch('s=Index/Say/addSayHit', data, 'post');
 
@@ -149,4 +149,15 @@ export const getUserComment = data => fetch('s=Index/Board/getUserComment', data
  * 用户留言
  */
 export const userBoardComment = data => fetch('s=Index/Board/userBoardComment', data, 'post');
- 
+
+/*
+ * 获取个人信息
+ */
+export const getInfo = () => fetch('s=Index/System/getInfo', {}, 'post');
+
+/*
+ * 关于我浏览量增加
+ */
+export const addAboutHit = data => fetch('s=Index/System/addAboutHit', data, 'post');
+
+
