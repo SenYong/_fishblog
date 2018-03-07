@@ -2,15 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-const index = r => require.ensure([], () => r(require('../page/index')), 'index');
-const abouts = r => require.ensure([], () => r(require('../page/about')), 'about');
-const artInfo = r => require.ensure([], () => r(require('../page/artInfo')), 'artInfo');
-const article = r => require.ensure([], () => r(require('../page/article')), 'article');
-const journal = r => require.ensure([], () => r(require('../page/journal')), 'journal');
-const journalInfo = r => require.ensure([], () => r(require('../page/journalInfo')), 'journalInfo');
-const say = r => require.ensure([], () => r(require("../page/say")), 'say');
-const sayInfo = r => require.ensure([], ()=>r(require("../page/sayInfo")), 'sayInfo');
-const board = r => require.ensure([], () => r(require('../page/board')), 'board');
+import index from "../page/index";
+import abouts from "../page/abouts";
+import artInfo from "../page/artInfo";
+import article from "../page/article";
+import journal from "../page/journal";
+import journalInfo from "../page/journalInfo";
+import say from "../page/say";
+import sayInfo from "../page/sayInfo";
+import board from "../page/board";
 
 export default new Router({
   routes: [
