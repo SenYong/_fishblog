@@ -21,7 +21,7 @@
                             <div id="slide-controls" style="display:block;">
                                 <p id="slide-client" class="text">
                                     <strong></strong>
-                                     <span></span>
+                                    <span></span>
                                 </p>
                                 <p id="slide-desc" class="text"></p>  
                                 <p id="slide-nav"></p>                          
@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="topnews">
-                    <h2>文章推荐</h2>
+                    <!-- <h2>文章推荐</h2> -->
                     <div class="blogs" v-for="(item, index) in list">
                         <figure><img :src="baseUrl+item.a_img"></figure>
                         <ul>
@@ -94,3 +94,4 @@
         }
     }
 </script>
+

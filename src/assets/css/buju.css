@@ -1,6 +1,6 @@
 /*¹²ÓÃCSS*/
 *{margin:0px;padding:0px;}
-body { font: 12px/1.5 'Microsoft Yahei', 'Simsun'; color: #666666; background: #fff }
+body { font: 12px/1.5 'Microsoft Yahei', 'Simsun'; color: #666666; background: #333 }
 img { border: 0; display: block }
 ul { list-style: none; }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
@@ -21,7 +21,7 @@ header{
 }
 #topnav {
 	width:60%;
-	background:#48AE15;
+	background:#222;
 	height:46px;
 	line-height:46px; 
 	text-align:center;
@@ -30,7 +30,7 @@ header{
 #topnav a { display: inline-block; font-size: 16px; font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif; padding: 0 20px; }
 #topnav a:hover { background: #fff; color: #000; }
 #topnav a { color: #FFF }
-#topnav .active { background: #F3FF41;color: #000 }
+#topnav .active { background: #fff;color: #000 }
 article{
 	width:1000px;
 	margin:20px auto;

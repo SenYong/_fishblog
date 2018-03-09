@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-import index from "../page/index";
+import indexs from "../page/index";
 import abouts from "../page/abouts";
 import artInfo from "../page/artInfo";
 import article from "../page/article";
@@ -11,6 +11,7 @@ import journalInfo from "../page/journalInfo";
 import say from "../page/say";
 import sayInfo from "../page/sayInfo";
 import board from "../page/board";
+import index from "../page/indexs";
 
 export default new Router({
   routes: [
@@ -55,6 +56,9 @@ export default new Router({
       path: '/board',
       component: board,
       meta: [5]
+    },{
+      path: '/indexs',
+      component: indexs
     }
   ]
 })
