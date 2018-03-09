@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
-
 import indexs from "../page/index";
 import abouts from "../page/abouts";
 import artInfo from "../page/artInfo";
