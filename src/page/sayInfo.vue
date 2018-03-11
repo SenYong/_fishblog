@@ -65,12 +65,15 @@
             </div><!--l_box f_l-->
             <head-right></head-right>
         </article>
+        <div class="clear"></div>
+        <head-foot></head-foot>
     </div>
 </template>
 
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
+    import headFoot from './public/HeadFoot';
     import vueEmoji from '../components/emoji.vue';
     import { sayDetail, prevSay, nextSay, getAllSayUser, addSayHit, userSayComment } from '../api/getData';
     import { baseUrl } from '../config/env';
@@ -87,7 +90,7 @@
               comment: []
             }
         },
-        components: {headTop, headRight, vueEmoji},
+        components: {headTop, headRight, headFoot, vueEmoji},
         created(){
             if(this.$route.query.id){
                this.sc_pid = this.$route.query.id;

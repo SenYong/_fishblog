@@ -1,3 +1,5 @@
+@charset "gb2312";
+/* CSS Document */
 * { margin: 0; padding: 0 }
 body { font: 12px "宋体", "Arial Narrow", HELVETICA; color: #3F3E3C; line-height: 1.5; background: #333; }
 img { border: 0; vertical-align: middle }
@@ -8,15 +10,14 @@ ul, ol { list-style: none; }
 a { color: #a6a6a6; text-decoration: none; transition: All 1s ease; -webkit-transition: All 1s ease; -moz-transition: All 1s ease; -ms-transition: All 1s ease; -o-transition: All 1s ease; }
 a:hover { color: #fff; }
 .blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
-
-header { width: 100%; background: #222; height: 70px; border-bottom: #464647 1px solid; }
-header nav { margin: 0 auto; width: 1000px; text-align: center; padding-top: 15px;}
-header nav .left{float: left;}
-header nav ul li { line-height: 40px; display: inline; }
-header nav ul li a { color: #E7E7E7; display: block; width: 120px; margin-right: 10px; float: left; }
-header nav ul li a:hover, #nav_current { color: #fff; background: rgba(20, 20, 20, 0.8); box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(0,0,0,.7); border-radius: 6px; }
+/* -----------------------nav 一级导航----------------- */
+/*header { width: 100%; background: #222; height: 70px; border-bottom: #464647 1px solid; }
+header nav { margin: 0 auto; width: 1000px; text-align: center; padding-top: 15px;background: red; }*/
+/*header nav ul li { line-height: 40px; display: inline; }
+header nav ul li a { color: #E7E7E7; display: block; padding: 0 20px; margin-right: 10px; float: left }
+header nav ul li a:hover, #nav_current { color: #fff; background: rgba(20, 20, 20, 0.8); box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(0,0,0,.7); border-radius: 6px; }*/
 #mainbody { width: 100%; border-top: #000 1px solid; clear: both; overflow: hidden; }
-
+/* ---------------------info------------------------- */
 .info { width: 1000px; margin: 40px auto; overflow: hidden; clear: both }
 /* 图片向上翻转的动画效果 */
 .info figure { display: inline-block; width: 630px; height: 250px; position: relative; -webkit-animation: pageTop 6s ease 0.5s backwards; -moz-animation: pageTop 6s ease 0.5s backwards; -ms-animation: pageTop 6s ease 0.5s backwards; -o-animation: pageTop 6s ease 0.5s backwards; animation: pageTop 6s ease 0.5s backwards; float: left; }
@@ -75,7 +76,7 @@ aside div { box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba
 .tuijian li:nth-child(n+3) { line-height: 24px } /* 选择从第3个开始往后数 */
 .tuijian li:nth-child(4) { margin: 5px 0 0 0 } /* 选择第四个 */
 /* 图文并茂 */
-.toppic li img { width: 80px;height: 80px; float: left; margin-right: 10px; }
+.toppic li img { width: 100px;height: 100px; float: left; margin-right: 10px; }
 .toppic ul li{ margin: 15px 0; }
 .toppic ul li a { display: block; width: 100%; clear: both; overflow: hidden }
 .toppic li p { color: #B5783E; padding-left: 110px; margin-top: 5px; background: url(../images/icons.png) no-repeat }
@@ -105,7 +106,7 @@ aside div { box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba
 .icon-like a:hover { color: #FFF; text-decoration: underline }
 .music audio { width: 100%; padding-top: 10px }
 /* --------------------------footer----------------------- */
-footer { background: rgba(0, 0, 0, 0.44); -webkit-box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); margin-top: 150px;}
+footer { background: rgba(0, 0, 0, 0.44); -webkit-box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); -moz-box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); box-shadow: 0 -1px 0 rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.09); }
 .footer-mid { width: 1000px; margin: auto; padding: 20px 0; overflow: hidden }
 .footer-mid li { line-height: 26px; }
 /* 访客留言 */

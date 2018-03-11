@@ -4,9 +4,11 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import "./assets/css/buju.css"
-import "./assets/css/index.css"
 import "./assets/css/iconfont.css"
 import "./assets/scss/common.scss"
+import "./style/style.css";
+import "./style/animation.css";
+import "./style/lrtk.css";
 import { emoji } from './api/emoji.js'
 Vue.use(ElementUI)
 Vue.prototype.emoji = emoji

@@ -19,12 +19,15 @@
             </div><!--l_box f_l-->
             <head-right></head-right>
         </article>
+        <div class="clear"></div>
+        <head-foot></head-foot>
     </div>
 </template>
 
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
+    import headFoot from './public/HeadFoot';
     import { getSayList } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
@@ -37,7 +40,7 @@
                 isShow: true
             }
         },
-        components: {headTop, headRight},
+        components: {headTop, headRight, headFoot},
         created(){
            this.getData(this.num, this.page);
         },

@@ -4,20 +4,13 @@
         <article>
             <div class="l_box f_l">
                <div class="topnews">
-                    <h2> 
-                         首页  >  <a href="{:U('/article')}">文章</a>  >  <a style="color:#0196E3">{{artData.a_name}}</a>
-                    </h2>
+                    <h2 class="t_nav"><a href="/">网站首页</a><a href="/">慢生活</a></h2>
                     <input type="hidden" value="{$info.a_id}" id="ac_pid">
                     <input type="hidden" value="" id="ac_name">
                     <input type="hidden" value="" id="ac_img">
                     <div class="artContent">
                         <div class="artTitle">{{artData.a_name}}</div>
-                        <div class="author">
-                           <div class="auto">
-                               <span class="au01">{{artData.a_root}}</span>
-                               <span class="au02">{{artData.a_time}}</span>
-                           </div>
-                        </div>
+                        <p class="box">发布时间：{{artData.a_time}}<span>编辑：{{artData.a_root}}</span>阅读（{{artData.a_hit}}）</p>
                         <div class="info" v-html="artData.a_content"></div>
                     </div>
                     <div class="copyright_author">
@@ -88,11 +81,14 @@
             </div><!--l_box f_l-->
             <head-right></head-right>
         </article>
+        <div class="clear"></div>
+        <head-foot></head-foot>
     </div>
 </template>
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
+    import headFoot from './public/HeadFoot';
     import vueEmoji from '../components/emoji.vue';
     import { artDetail, prevArt, nextArt, addArtHit, userArtComment, getAllUser} from '../api/getData';
     import { baseUrl } from '../config/env';
@@ -110,7 +106,7 @@
             baseUrl
          }
        },
-       components: {headTop, headRight, vueEmoji},
+       components: {headTop, headRight, headFoot, vueEmoji},
        created(){
           if(this.$route.query.id){
              this.ac_pid = this.$route.query.id;
@@ -277,4 +273,11 @@ ul{
 .list-enter, .list-leave-active { opacity: 0; transform: translateX(30px); }
 .list-leave-active { position: absolute !important; }
 .list-move { transition: all .5s;}
+h2.t_nav { border-bottom: #247979 3px solid; font-size: 12px; font-weight: normal; line-height: 48px; height: 40px }
+h2.t_nav a { padding: 10px; }
+h2.t_nav a:first-child { background: #247979; color: #fff; }
+h2.t_nav a:last-child { background: #59BCBC; color: #fff; }
+.box { border: #ccc 1px dashed; text-align: center; padding: 5px 0; margin: 0 30px 10px 30px; color: #666 }
+.box span { margin: 0 10px }
+.l_box .info{width: 670px;}
 </style>

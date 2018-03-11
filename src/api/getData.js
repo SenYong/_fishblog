@@ -3,7 +3,7 @@ import fetch from '../config/fetch';
 /*
 * 首页文章列表
 */
-export const  getArticle = () => fetch('s=Index/Index/getArticle', {}, 'post');
+export const  getArticle = data => fetch('s=Index/Index/getArticle', data, 'post');
 
 /*
  * 最新文章
@@ -159,5 +159,12 @@ export const getInfo = () => fetch('s=Index/System/getInfo', {}, 'post');
  * 关于我浏览量增加
  */
 export const addAboutHit = data => fetch('s=Index/System/addAboutHit', data, 'post');
+
+/*
+ * 获取文章最新评论
+ */
+export const newArtComment = () => fetch("s=Index/Article/newArtComment", {}, "post");
+
+export const getMusic = () => fetch("s=Index/Index/getMusic", {}, "post");
 
 

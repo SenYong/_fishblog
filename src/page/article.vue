@@ -1,43 +1,60 @@
 <template>
     <div>
         <head-top></head-top>
-        <article>
-            <div class="l_box f_l">
-                <div class="topnews">
-                    <h2>
-                       <span>
-                           <a v-for="(item, index) in cat" @click="catTo(item.c_id)">{{item.c_name}}</a>
-                       </span>   
-                       <a @click="catTo('')" style="color:red;">技术心得</a>
-                    </h2>
-                    <div id="list" v-if="list.length > 0">
-                        <div class="blogs" v-for="(item, index) in list">
-                            <figure><img :src="baseUrl+item.a_img"></figure>
-                            <ul>
-                                <h3><a @click="artTo(item.a_id)">{{item.a_name}}</a></h3>
-                                <p>{{item.a_desc}}</p>
-                                <p class="autor">
-                                    <span class="lm f_l"><a href="/">{{item.c_name}}</a></span>
-                                    <span class="dtime f_l">{{item.a_time}}</span>
-                                    <span class="viewnum f_r">浏览（<a href="{:U('/artinfo-'.$vo['a_id'])}">{{item.a_hit}}</a>）</span>
-                                    <span class="pingl f_r">评论（<a href="{:U('/artinfo-'.$vo['a_id'])}">{{item.a_num}}</a>）</span>
-                                </p>
-                            </ul>
-                        </div>
-                   </div>
-                   <div class="more" v-else>暂无文章</div>
-                   <div class="more" @click="getMore()" v-if="isShow">查看更多</div>
-                </div><!--topnews-->
-            </div><!--l_box f_l-->
-            <head-right></head-right>
-        </article>
+        <div id="mainbody">
+          <div class="info">
+            <figure> <img src="../images/art.jpg"  alt="Panama Hat">
+              <figcaption><strong>渡人如渡己，渡已，亦是渡</strong> 当我们被误解时，会花很多时间去辩白。 但没有用，没人愿意听，大家习惯按自己的所闻、理解做出判别，每个人其实都很固执。与其努力且痛苦的试图扭转别人的评判，不如默默承受，给大家多一点时间和空间去了解。而我们省下辩解的功夫，去实现自身更久远的人生价值。其实，渡人如渡己，渡已，亦是渡人。</figcaption>
+            </figure>
+            <div class="card">
+              <h1>我的名片</h1>
+              <p>姓名：{{info.username}}</p>
+              <p>网名：{{info.netname}}</p>
+              <p>职业：{{info.profession}}</p>
+              <p>QQ：{{info.qq}}</p>
+              <ul class="linkmore">
+                <li><a @click="navTo('/board')" class="talk" title="给我留言"></a></li>
+                <li><a @click="navTo('/abouts')" class="address" title="关于我"></a></li>
+                <!--<li><a href="/" class="email" title="给我写信"></a></li>-->
+                <!--<li><a href="/" class="photos" title="生活照片"></a></li>-->
+                <li><a href="/" class="heart" title="关注我"></a></li>
+              </ul>
+            </div>
+          </div>
+          <!--info end-->
+          <div class="blank"></div>
+          <div class="blog">
+                <ul class="bloglist">
+                  <li v-for="(item, index) in list">
+                    <div class="arrow_box">
+                      <div class="ti"></div>
+                      <div class="ci"></div>
+                      <h2 class="titles"><a @click="artTo(item.a_id)" target="_blank">{{item.a_name}}</a></h2>
+                      <ul class="textinfo">
+                        <a href="/"><img :src="baseUrl+item.a_img"></a>
+                        <p> {{item.a_desc}}</p>
+                      </ul>
+                      <ul class="details">
+                        <li class="likes"><a href="#">{{item.a_hit}}</a></li>
+                        <li class="comments"><a href="#">{{item.a_num}}</a></li>
+                        <li class="icon-time"><a href="#">{{item.a_time}}</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+                <!--bloglist end-->
+                <head-right></head-right>
+            </div>
+        </div>
+        <head-foot></head-foot>
     </div>
 </template>
 
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
-    import { getArtList, getCat, artCatList } from '../api/getData';
+    import headFoot from './public/HeadFoot';
+    import { getArtList, getCat, artCatList, getInfo } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
        data(){
@@ -48,16 +65,17 @@
              cat: [],
              baseUrl,
              isShow: true,
-             cid: ''
+             cid: '',
+             info: ""
           }
        },
-       components: {headTop, headRight},
+       components: {headTop, headRight, headFoot},
        created(){
           this.$route.query.id ? this.catTo(this.$route.query.id) : this.getData();
        },
        methods: { 
           async getData(){
-            Promise.all([getArtList({num: this.num, page: this.page}), getCat()]).then(res => {
+            Promise.all([getArtList({num: this.num, page: this.page}), getCat(), getInfo()]).then(res => {
                 for(var i = 0; i < res.length; i++){
                     res[i] = JSON.parse(res[i]);
                 }
@@ -72,6 +90,9 @@
                 }
                 if(res[1].errcode == 0){
                     this.cat = res[1].data;
+                }
+                if(res[2].errcode == 0){
+                    this.info = res[2].data[0];
                 }
             })
           },

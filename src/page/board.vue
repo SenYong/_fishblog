@@ -51,6 +51,7 @@
             </div><!--l_box f_l-->
             <head-right></head-right>
         </article>
+        <div class="clear"></div>
         <head-foot></head-foot>
     </div>
 </template>
@@ -74,7 +75,7 @@
                 b_content: ''
             }
         },
-        components:{headTop, headRight, vueEmoji, headFoot},
+        components:{headTop, headRight, headFoot, vueEmoji},
         created(){
             this.getData(this.num, this.page);
         },

@@ -1,81 +1,49 @@
 <template>
-   <div>
-       <div class="r_box f_r">
-         <div class="tit01">
-              <h3>关注我</h3>
-              <div class="gzwm">
+    <div>
+        <aside>
+              <div class="tuijian">
+                <h2>最新文章</h2>
+                <ol>
+                  <li v-for="(item, index) in art"><span><strong>{{index+1}}</strong></span><a href="/">{{item.a_name}}</a></li>
+                </ol>
+              </div>
+              <div class="toppic">
+                <h2>最新说说</h2>
                 <ul>
-                 <li><a class="xlwb" href="https://weibo.com/u/1854068535" target="_blank">新浪微博</a></li>
-                 <li><a class="txwb" href="http://t.qq.com/sen1157927284" target="_blank">腾讯微博</a></li>
-                 <li><a class="rss" href="#" target="_blank">RSS</a></li>
-                 <li><a class="wx" href="#" target="_blank">邮箱</a></li>
+                  <li v-for="(item, index) in say">
+                     <a href="/"><img :src="baseUrl+item.s_img" class="sayImg"><span v-html="emoji(item.s_content)"></span><p>伤不起</p></a>
+                  </li>
                 </ul>
               </div>
-          </div> 
-          <div class="ad300x100">
-             <img src="../../assets/img/wh.jpg">
-          </div>
-          <div class="tab" id="lp_right_select">    
-             <div class="tab-top">
-                <ul class="hd" id="tb">
-                  <li v-for="(item,index) in navBar" :class=" item.bool ? 'cur' : '' " @click="change(index)"><a>{{item.title}}</a></li>
-              </ul>
-            </div>
-            <div class="tab-main" id="tb-main">
-                <div class="bd bd-news" v-show="navBar[0].bool">
-                  <ul>
-                      <li v-for="(item, index) in art"><a @click="navTo('/artInfo',item.a_id)" class="pointer">{{item.a_name}}</a></li>
-                  </ul>
-                </div>
-                <div class="bd bd-news" v-show="navBar[1].bool">
-                   <ul>
-                      <li v-for="(item, index) in log"><a @click="navTo('/journalInfo',item.l_id)" class="pointer">{{item.l_name}}</a></li>
-                  </ul>
-                </div>
-                <div class="bd bd-news" v-show="navBar[2].bool">
-                   <ul>
-                      <li v-for="(item, index) in say"><a @click="navTo('/sayInfo',item.s_id)" class="pointer">{{item.s_content}}</a></li>
-                   </ul>
-                </div>
-            </div>
-          </div>
-          <div class="cloud">
-               <h3>标签云</h3>
-               <ul>
-                  <li v-for="(item,index) in cat"><a @click="navTo('/article',item.c_id)" class="pointer">{{item.c_name}}</a></li>
-              </ul>
-          </div>
-          <div class="tuwen">
-             <h3>点击排行</h3>
-             <ul>
-                <li v-for="(item,index) in hit"><a @click="navTo('/artInfo',item.a_id)" class="pointer"><img :src="baseUrl+item.a_img"><b>{{item.a_name}}</b></a>
-                   <p>
-                     <span class="tulanum"><a>{{item.c_name}}</a></span>
-                     <span class="tutime">{{item.a_time}}</span>
-                   </p>
-                </li>
-             </ul>
-          </div>
-          <div class="ad"><img src="../../assets/img/03.jpg"></div>
-          <div class="links">
-             <h3><span><a href="/">申请友情链接</a></span>友情链接</h3>
-             <ul>
-               <li><a href="/">醉牛逼的武魂生涯</a></li>
-               <li><a href="/">观察者网</a></li>
-               <li><a href="/">中国投资</a></li>
-               <li><a href="/">强国论坛</a></li>
-               <li><a href="/">车讯网</a></li>
-               <li><a href="http://www.genban.org">跟版模板网</a></li>
-               <li><a href="/">一带一路门户网</a></li>
-             </ul>
-          </div>
-      </div>
-      <div class="clear"></div>
-   </div>
+              <div class="clicks">
+                <h2>最新日志</h2>
+                <ol>
+                  <li v-for="(item, index) in log"><span><a href="/">慢生活</a></span><a href="/">{{item.l_name}}</a></li>
+                </ol>
+              </div>
+              <div class="search">
+                <form class="searchform" method="get" action="#">
+                  <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+                </form>
+              </div>
+              <div class="viny">
+                <dl>
+                  <dt class="art"><img src="../../images/artwork.png" alt="专辑"></dt>
+                  <dd class="icon-song"><span></span>南方姑娘</dd>
+                  <dd class="icon-artist"><span></span>歌手：赵雷</dd>
+                  <dd class="icon-album"><span></span>所属专辑：《赵小雷》</dd>
+                  <dd class="icon-like"><span></span><a href="/">喜欢</a></dd>
+                  <dd class="music">
+                    <audio :src="audioUrl" controls autoplay></audio>
+                  </dd>
+                </dl>
+              </div>
+        </aside>
+    </div>
 </template>
 
 <script type="text/javascript">
-   import { newArt, newLog, newSay, getCat, artHit} from '../../api/getData';
+   import { newArt, newLog, newSay, getCat, artHit, getMusic} from '../../api/getData';
    import { baseUrl } from '../../config/env';
    export default{
       data(){
@@ -86,7 +54,8 @@
           say: [],
           cat: [],
           hit: [],
-          baseUrl
+          baseUrl,
+          audioUrl:""
         }
       },
       created(){
@@ -94,7 +63,7 @@
       },
       methods: {
         async init(){
-            Promise.all([newArt(), newLog(), newSay(), getCat(), artHit()]).then( res => {
+            Promise.all([newArt(), newLog(), newSay(), getCat(), artHit(), getMusic()]).then( res => {
                 for(var i = 0; i < res.length; i++){
                     res[i] = JSON.parse(res[i]);
                 }
@@ -116,6 +85,10 @@
                    }
                    this.hit = res[4].data;
                 }
+                if(res[5].errcode == 0){
+                  this.audioUrl = res[5].url;
+                }
+                console.log(res[5])
             })
         },
         change(index){
