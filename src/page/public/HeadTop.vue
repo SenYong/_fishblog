@@ -26,8 +26,8 @@
         this.header[this.$route.meta[0]].bool = true;
       },
       methods:{
-        navBarTo(navTo,index){
-          this.$router.push({path:navTo})
+        navBarTo(path,index){
+          this.$router.push({path})
         }
       }
    }

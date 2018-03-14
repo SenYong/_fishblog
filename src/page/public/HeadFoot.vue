@@ -5,8 +5,7 @@
           <div class="link">
             <h2>友情链接</h2>
             <ul>
-              <li><a href="/">杨青个人博客</a></li>
-              <li><a >3DST技术服务中心</a></li>
+              <li><a href="/">小鱼博客1.0版本</a></li>
             </ul>
           </div>
           <div class="visitors">
