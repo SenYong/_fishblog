@@ -22,19 +22,19 @@
                 </ol>
               </div>
               <div class="search">
-                <form class="searchform" method="get" action="#">
-                  <input type="text" name="s" value="Search" onfocus="this.value=''" onblur="this.value='Search'">
+                <form class="searchform">
+                   <input type="text" v-model="search" @focus="onfocus" @blur="onblur">
                 </form>
               </div>
               <div class="viny">
                 <dl>
-                  <dt class="art"><img src="../../images/artwork.png" alt="专辑"></dt>
-                  <dd class="icon-song"><span></span>南方姑娘</dd>
-                  <dd class="icon-artist"><span></span>歌手：赵雷</dd>
-                  <dd class="icon-album"><span></span>所属专辑：《赵小雷》</dd>
+                  <dt class="art"><img :src="songInfo.songImgUrl" alt="专辑"></dt>
+                  <dd class="icon-song"><span></span>{{songInfo.title}}</dd>
+                  <dd class="icon-artist"><span></span>歌手：{{songInfo.author}}</dd>
+                  <!--<dd class="icon-album"><span></span>所属专辑：《赵小雷》</dd>-->
                   <dd class="icon-like"><span></span><a href="/">喜欢</a></dd>
                   <dd class="music">
-                    <audio :src="audioUrl" controls autoplay></audio>
+                    <audio :src="songInfo.audioUrl" controls autoplay></audio>
                   </dd>
                 </dl>
               </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/javascript">
-   import { newArt, newLog, newSay, getCat, artHit, getMusic} from '../../api/getData';
+   import { newArt, newLog, newSay, getCat, artHit, getMusic, searchMusic} from '../../api/getData';
    import { baseUrl } from '../../config/env';
    export default{
       data(){
@@ -55,15 +55,35 @@
           cat: [],
           hit: [],
           baseUrl,
-          audioUrl:""
+          songInfo:{},
+          search: "Search"
         }
       },
       created(){
-        this.init();
+        this.init(this.randomPlay());
       },
       methods: {
-        async init(){
-            Promise.all([newArt(), newLog(), newSay(), getCat(), artHit(), getMusic()]).then( res => {
+        //随机播放不同民风的歌曲
+        //type = 1-新歌榜,2-热歌榜,11-摇滚榜,12-爵士,16-流行,21-欧美金曲榜,22-经典老歌榜,23-情歌对唱榜,24-影视金曲榜,25-网络歌曲榜
+        randomPlay (){
+            var arr = [1,2,11,12,16,21,22,23,24,25];
+            return arr[Math.floor(Math.random() * arr.length)]
+        },
+        onfocus (){
+            this.search = "";
+        },
+        onblur(){
+            if(this.search == "") return false;
+            this.searchSong()
+        },
+        async searchSong(search){
+            var res = JSON.parse(await searchMusic({search}));
+            if(res.errcode == 0){
+               this.songInfo = res;
+            }
+        },
+        async init(type){
+            Promise.all([newArt(), newLog(), newSay(), getCat(), artHit(), getMusic({type})]).then( res => {
                 for(var i = 0; i < res.length; i++){
                     res[i] = JSON.parse(res[i]);
                 }
@@ -86,7 +106,7 @@
                    this.hit = res[4].data;
                 }
                 if(res[5].errcode == 0){
-                  this.audioUrl = res[5].url;
+                  this.songInfo = res[5];
                 }
                 console.log(res[5])
             })

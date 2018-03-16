@@ -165,6 +165,12 @@ export const addAboutHit = data => fetch('s=Index/System/addAboutHit', data, 'po
  */
 export const newArtComment = () => fetch("s=Index/Article/newArtComment", {}, "post");
 
-export const getMusic = () => fetch("s=Index/Index/getMusic", {}, "post");
+/*
+ * 获取随机音乐
+ */
+export const getMusic = data => fetch("s=Index/Index/getMusic", data, "post");
 
-
+/*
+ * 搜索音乐
+ */
+export const searchMusic = data => fetch("s=Index/Index/searchMusic", data, "post");
