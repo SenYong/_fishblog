@@ -14,7 +14,7 @@
                       </div>
                   </div>
                   <div class="more" v-else>暂无说说</div>
-                  <div class="more" @click="getMore()" v-if="isShow">查看更多</div>
+                  <v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination>
                </div><!--topnews-->
             </div><!--l_box f_l-->
             <head-right></head-right>
@@ -28,21 +28,22 @@
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
+    import vPagination from './public/pagination';
     import { getSayList } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
         data(){
             return {
-                num: 0,
-                page: 6,
                 list: [],
                 baseUrl,
-                isShow: true
+                total: 0,     // 记录总条数
+                page: 7,   // 每页显示条数
+                current: 1,   // 当前的页数
             }
         },
-        components: {headTop, headRight, headFoot},
+        components: {headTop, headRight, headFoot, vPagination},
         created(){
-           this.getData(this.num, this.page);
+           this.getData(this.current - 1, this.page);
         },
         methods: {
             async getData(num,page){
@@ -52,9 +53,8 @@
                     for(var i = 0; i < res.data.length; i++){
                        res.data[i]['s_time'] = this.timestampToTime(res.data[i]['s_time']);
                     }
-                    this.list = this.num == 0 ? res.data : this.list.concat(res.data);
-                  }else{
-                    this.isShow = false;
+                    this.list = res.data;
+                    this.total = res.total;
                   }
                 }else{
                   this.$message.error(res.msg);
@@ -65,7 +65,7 @@
                 var date = new Date(time * 1000);
                 var year = date.getFullYear() + '-';
                 var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-                var day = date.getDate() + ' ';
+                var day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
                 return year + month + day;
             },
             sayTo(id){
@@ -75,6 +75,9 @@
             getMore(){
                this.num += 1;
                this.getData(this.num * this.page, this.page);
+            },
+            async pagechange (currentPage){
+               this.getData((currentPage - 1) * this.page, this.page);
             }
         }
     }

@@ -11,13 +11,15 @@
                       <img :src="baseUrl+sayData.s_img" class="sayImg" v-if="sayData.s_img">
                       <p class="p2"><a class="span1" href="">浏览({{sayData.s_hit}})</a><a class="span2" href="">评论({{sayData.s_num}})</a></p>
                   </div> 
-                  <div class="nextpage" v-if="prev">
-                    <b>上一条说说:</b>
-                    <a @click="LogTo(prev.s_id)" class="pointer">{{prev.s_content}}</a>
-                  </div>
-                   <div class="nextpage" v-if="next">
-                      <b>下一条说说:</b>
-                      <a @click="LogTo(next.s_id)" class="pointer">{{next.s_content}}</a>
+                  <div class="sayPage">
+                     <div class="nextpage" v-if="prev">
+                        <b>上一条说说:</b>
+                        <a @click="LogTo(prev.s_id)" class="pointer">{{prev.s_content}}</a>
+                      </div>
+                       <div class="nextpage" v-if="next">
+                          <b>下一条说说:</b>
+                          <a @click="LogTo(next.s_id)" class="pointer">{{next.s_content}}</a>
+                      </div>
                   </div>
                   <div class="cont">
                     <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 20}" placeholder="请输入内容" resize="none" v-model="sc_content"></el-input>
@@ -141,9 +143,10 @@
                    return false;
                 }
                 var data = {};
+                var ran = 1 + Math.ceil(Math.random() * 199);
                 data.sc_pid = this.sc_pid;
                 data.sc_name = '游客';
-                data.sc_img = '/public/static/default/default.png';
+                data.sc_img = '/public/static/default/'+ ran +'.png';
                 data.sc_content = this.sc_content;
                 var res = JSON.parse(await userSayComment(data));
                 if(res.errcode == 0){
@@ -195,5 +198,8 @@
       width:100px;
       height:100px;
       margin-bottom:20px;  
+    }
+    .sayPage{
+      padding:10px 0;
     }
 </style>

@@ -110,8 +110,9 @@
                    return false;
                 }
                 var data = {};
+                var ran = 1 + Math.ceil(Math.random() * 199);
                 data.b_name = '游客';
-                data.b_img = '/public/static/default/default.png';
+                data.b_img = '/public/static/default/'+ ran +'.png';
                 data.b_content = this.b_content;
                 var res = JSON.parse(await userBoardComment(data));
                 if(res.errcode == 0){

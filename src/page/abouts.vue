@@ -76,7 +76,6 @@
                    }
                    this.imgList = res[1].data;
                 }
-                console.log(this.info)
              })
            }
         }

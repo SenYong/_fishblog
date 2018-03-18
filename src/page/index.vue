@@ -3,8 +3,8 @@
         <head-top></head-top>
         <div id="mainbody">
           <div class="info">
-            <figure> <img src="../images/art.jpg"  alt="Panama Hat">
-              <figcaption><strong>渡人如渡己，渡已，亦是渡</strong> 当我们被误解时，会花很多时间去辩白。 但没有用，没人愿意听，大家习惯按自己的所闻、理解做出判别，每个人其实都很固执。与其努力且痛苦的试图扭转别人的评判，不如默默承受，给大家多一点时间和空间去了解。而我们省下辩解的功夫，去实现自身更久远的人生价值。其实，渡人如渡己，渡已，亦是渡人。</figcaption>
+            <figure> <img src="../images/index.png"  alt="Panama Hat">
+              <figcaption><strong>致我们终将逝去的青春</strong> 这个世界上总有那么一个人，是你的念想，是你的温暖。就算她不远不近，只要想到她，就永远会觉得安定，觉得踏实，觉得心里有底。甚至连周围的空气，都变得笃定。世界只是一些影影绰绰的温柔。河还是原来的河，人还是原来的人。我仍然为你守候，那些小幸福，我认真，你随意。</figcaption>
             </figure>
             <div class="card">
               <h1>我的名片</h1>
@@ -63,7 +63,10 @@
                 baseUrl,
                 page: 8,
                 num: 0,
-                info: ""
+                info: "",
+                total: 150,     // 记录总条数
+                display: 10,   // 每页显示条数
+                current: 1,   // 当前的页数
             }
         },
         components: {headTop, headRight, headFoot},
@@ -77,7 +80,8 @@
                    res[i] = JSON.parse(res[i]);
                 }
                 if(res[0].errcode == 0){
-                    for(let i = 0; i < res[0].length; i++){
+
+                    for(let i = 0; i < res[0].data.length; i++){
                         res[0].data[i]["a_time"] = this.timestampToTime(res[0].data[i]["a_time"]);
                     }
                     this.list = res[0].data;
@@ -89,10 +93,11 @@
            },
            //时间戳转换成时间
            timestampToTime (time) {
+
                var date = new Date(time * 1000);
                var year = date.getFullYear() + '-';
                var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-               var day = date.getDate() + ' ';
+               var day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
                return year + month + day;
            },
            artDetail(id){

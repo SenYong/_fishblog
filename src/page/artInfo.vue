@@ -136,7 +136,6 @@
                    }
                    this.comment = res[3].data;
                 }
-                console.log(res)
              })
           },
           //时间戳转换成时间
@@ -183,9 +182,10 @@
                return false;
             }
             var data = {};
+            var ran = 1 + Math.ceil(Math.random() * 199);
             data.ac_pid = this.ac_pid;
             data.ac_name = '游客';
-            data.ac_img = '/public/static/default/default.png';
+            data.ac_img = '/public/static/default/'+ ran +'.png';
             data.ac_content = this.ac_content;
             var res = JSON.parse(await userArtComment(data));
             if(res.errcode == 0){

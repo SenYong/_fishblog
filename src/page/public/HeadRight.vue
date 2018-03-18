@@ -108,7 +108,6 @@
                 if(res[5].errcode == 0){
                   this.songInfo = res[5];
                 }
-                console.log(res[5])
             })
         },
         change(index){

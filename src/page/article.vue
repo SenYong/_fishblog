@@ -41,6 +41,7 @@
                       </ul>
                     </div>
                   </li>
+                  <li><v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination></li>
                 </ul>
                 <!--bloglist end-->
                 <head-right></head-right>
@@ -54,28 +55,31 @@
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
+    import vPagination from './public/pagination';
     import { getArtList, getCat, artCatList, getInfo } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
        data(){
           return {
              num: 0,
-             page: 10,
              list: [],
              cat: [],
              baseUrl,
              isShow: true,
              cid: '',
-             info: ""
+             info: "",
+             total: 0,     // 记录总条数
+             page: 7,   // 每页显示条数
+             current: 1,   // 当前的页数
           }
        },
-       components: {headTop, headRight, headFoot},
+       components: {headTop, headRight, headFoot, vPagination},
        created(){
-          this.$route.query.id ? this.catTo(this.$route.query.id) : this.getData();
+          this.$route.query.id ? this.catTo(this.$route.query.id) : this.getData(this.current - 1, this.page);
        },
        methods: { 
-          async getData(){
-            Promise.all([getArtList({num: this.num, page: this.page}), getCat(), getInfo()]).then(res => {
+          async getData(num, page){
+            Promise.all([getArtList({num, page}), getCat(), getInfo()]).then(res => {
                 for(var i = 0; i < res.length; i++){
                     res[i] = JSON.parse(res[i]);
                 }
@@ -86,6 +90,7 @@
                         }
                         this.isShow = true;
                         this.list = res[0].data;
+                        this.total = res[0].total;
                     }
                 }
                 if(res[1].errcode == 0){
@@ -101,7 +106,7 @@
             var date = new Date(time * 1000);
             var year = date.getFullYear() + '-';
             var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-            var day = date.getDate() + ' ';
+            var day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
             return year + month + day;
           },
           //获取更多
@@ -138,6 +143,15 @@
           },
           artTo(id){
              this.$router.push({ path: '/artInfo', query: {id}});
+          },
+          async pagechange(currentPage){
+             var res = JSON.parse(await getArtList({num: (currentPage - 1) * this.page, page: this.page}));
+             if(res.errcode == 0){
+                for(var i = 0; i < res.data.length; i++){
+                  res.data[i]['a_time'] = this.timestampToTime(res.data[i]['a_time']);
+                }
+                this.list = res.data;
+             }
           }
        }
     }

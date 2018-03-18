@@ -136,7 +136,6 @@
                     }
                     this.comment = res[3].data;
                 }
-                console.log(res)
              })
           },
           //时间戳转换成时间
@@ -170,7 +169,6 @@
                     }
                     this.comment = res[3].data;
                 }
-                console.log(res)
              })
           },
           selectEmoji (code) {
@@ -184,9 +182,10 @@
                return false;
             }
             var data = {};
+            var ran = 1 + Math.ceil(Math.random() * 199);
             data.lc_pid = this.lc_pid;
             data.lc_name = '游客';
-            data.lc_img = '/public/static/default/default.png';
+            data.lc_img = '/public/static/default/'+ ran +'.png';
             data.lc_content = this.lc_content;
             var res = JSON.parse(await userLogComment(data));
             if(res.errcode == 0){

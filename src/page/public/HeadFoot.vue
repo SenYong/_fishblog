@@ -27,7 +27,7 @@
           </section>
         </div>
         <div class="footer-bottom">
-          <p>Copyright 2013 Design by <a href="http://www.yangqq.com">DanceSmile</a></p>
+          <p>Copyright 2018 Design by <a href="http://www.yangqq.com">小鱼博客</a></p>
         </div>
     </footer>
   </div>
@@ -54,7 +54,6 @@
                 for(let i = 0; i < res.length; i++){
                     res[i] = JSON.parse(res[i]);
                 }
-                console.log(res)
                 if(res[0].errcode == 0){
                    for(let i = 0; i < res[0].data.length; i++){
                       res[0].data[i]["ac_time"] = this.timestampToTime(res[0].data[i]["ac_time"]);

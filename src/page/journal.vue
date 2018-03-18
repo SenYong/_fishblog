@@ -3,8 +3,8 @@
         <head-top></head-top>
         <div id="mainbody">
           <div class="info">
-            <figure> <img src="../images/art.jpg"  alt="Panama Hat">
-              <figcaption><strong>渡人如渡己，渡已，亦是渡</strong> 当我们被误解时，会花很多时间去辩白。 但没有用，没人愿意听，大家习惯按自己的所闻、理解做出判别，每个人其实都很固执。与其努力且痛苦的试图扭转别人的评判，不如默默承受，给大家多一点时间和空间去了解。而我们省下辩解的功夫，去实现自身更久远的人生价值。其实，渡人如渡己，渡已，亦是渡人。</figcaption>
+            <figure> <img src="../images/log.png"  alt="Panama Hat">
+              <figcaption><strong>幸福原来离你不远</strong> 人生并不在于获取，更在于放得下。放下一粒种子，收获一棵大树;放下一处烦恼，收获一个惊喜;放下一种偏见，收获一种幸福;放下一种执著，收获一种自在。放下既是一种理性抉择，也是一种豁达美。只要看得开、放得下，何愁没有快乐的春莺在啼鸣，何愁没有快乐的泉溪在歌唱，何愁没有快乐的鲜花绽放</figcaption>
             </figure>
             <div class="card">
               <h1>我的名片</h1>
@@ -41,6 +41,7 @@
                       </ul>
                     </div>
                   </li>
+                  <li><v-pagination :total="total" :current-page='current' @pagechange="pagechange"></v-pagination></li>
                 </ul>
                 <!--bloglist end-->
                 <head-right></head-right>
@@ -54,22 +55,24 @@
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
+    import vPagination from './public/pagination';
     import { getLogList, getInfo } from '../api/getData';
     import { baseUrl } from '../config/env';
     export default{
        data(){
          return {
             list: [],
-            num: 0,
-            page: 2,
             baseUrl,
             isShow: true,
-            info: ""
+            info: "",
+            total: 0,     // 记录总条数
+            page: 7,   // 每页显示条数
+            current: 1,   // 当前的页数
          }
        },
-       components: {headTop, headRight, headFoot},
+       components: {headTop, headRight, headFoot, vPagination},
        created(){
-          this.getData(this.num, this.page);
+          this.getData(this.current - 1, this.page);
        },
        methods:{
           async getData(num, page){
@@ -84,6 +87,7 @@
                         }
                         this.isShow = true;
                         this.list = res[0].data;
+                        this.total = res[0].total;
                     }else{
                         this.isShow = false;
                     } 
@@ -103,6 +107,15 @@
           },
           logTo(id){
              this.$router.push({ path: '/journalInfo', query: {id}});
+          },
+          async pagechange (currentPage){
+             var res = JSON.parse(await getLogList({num: (currentPage - 1) * this.page, page: this.page}));
+             if(res.errcode == 0){
+                for(var i = 0; i < res.data.length; i++){
+                  res.data[i]['l_time'] = this.timestampToTime(res.data[i]['l_time']);
+                }
+                this.list = res.data;
+             }
           }
        }
     }
