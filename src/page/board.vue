@@ -92,14 +92,6 @@
                   this.$message.error(res.msg);
                }
             },
-            //时间戳转换成时间
-            timestampToTime (time) {
-               var date = new Date(time * 1000);
-               var year = date.getFullYear() + '-';
-               var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-               var day = date.getDate() + ' ';
-               return year + month + day;
-            },
             selectEmoji (code) {
                this.showEmoji = false
                this.b_content += code

@@ -138,14 +138,6 @@
                 }
              })
           },
-          //时间戳转换成时间
-          timestampToTime (time) {
-              var date = new Date(time * 1000);
-              var year = date.getFullYear() + '-';
-              var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-              var day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
-              return year + month + day;
-          },
           ArtTo(id){
               this.$router.push({ path: '/artInfo', query: {id}});
               Promise.all([artDetail({id}), prevArt({id}), nextArt({id}), getAllUser({id}), addArtHit({id})]).then(res=>{

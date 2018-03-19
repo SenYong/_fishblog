@@ -4,21 +4,21 @@
               <div class="tuijian">
                 <h2>最新文章</h2>
                 <ol>
-                  <li v-for="(item, index) in art"><span><strong>{{index+1}}</strong></span><a href="/">{{item.a_name}}</a></li>
+                  <li v-for="(item, index) in art"><span><strong>{{index+1}}</strong></span><a @click="navTo('/artInfo', item.a_id)" class="cur">{{item.a_name}}</a></li>
                 </ol>
               </div>
               <div class="toppic">
                 <h2>最新说说</h2>
                 <ul>
                   <li v-for="(item, index) in say">
-                     <a href="/"><img :src="baseUrl+item.s_img" class="sayImg"><span v-html="emoji(item.s_content)"></span><p>伤不起</p></a>
+                     <a class="cur" @click="navTo('/sayInfo', item.s_id)"><img :src="baseUrl+item.s_img" class="sayImg"><span v-html="emoji(item.s_content)"></span><p>伤不起</p></a>
                   </li>
                 </ul>
               </div>
               <div class="clicks">
                 <h2>最新日志</h2>
                 <ol>
-                  <li v-for="(item, index) in log"><span><a href="/">慢生活</a></span><a href="/">{{item.l_name}}</a></li>
+                  <li v-for="(item, index) in log"><span><a class="cur" @click="navTo('/journalInfo', item.l_id)">慢生活</a></span><a class="cur">{{item.l_name}}</a></li>
                 </ol>
               </div>
               <div class="search">
@@ -115,14 +115,6 @@
              this.navBar[i].bool = false;
           }
           this.navBar[index].bool = true;
-        },
-        //时间戳转换成时间
-        timestampToTime (time) {
-          var date = new Date(time * 1000);
-          var year = date.getFullYear() + '-';
-          var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-          var day = date.getDate() + ' ';
-          return year + month + day;
         },
         navTo(path,id){
           this.$router.push({path, query:{id}})

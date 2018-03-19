@@ -10,8 +10,11 @@ import "./style/style.css";
 import "./style/animation.css";
 import "./style/lrtk.css";
 import { emoji } from './api/emoji.js'
+import { pageTo, timestampToTime } from './api/common.js'
 Vue.use(ElementUI)
 Vue.prototype.emoji = emoji
+Vue.prototype.pageTo = pageTo
+Vue.prototype.timestampToTime = timestampToTime
 
 new Vue({
   el: '#app',

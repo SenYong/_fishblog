@@ -15,14 +15,14 @@
               <dd>{{item.ac_name}}
                 <time>{{item.ac_time}}</time>
               </dd>
-              <dd>在 <a  class="title">{{item.a_name}} </a>中评论：</dd>
+              <dd>在 <a  class="title cur" @click="navTo('/artInfo', item.a_id)">{{item.a_name}} </a>中评论：</dd>
               <dd v-html="emoji(item.ac_content)"></dd>
             </dl>
           </div>
           <section class="flickr">
             <h2>摄影作品</h2>
             <ul>
-              <li v-for="(item,index) in sayImg"><a  @click="navTo(item.s_id)" v-if="item.s_img != null"><img :src="baseUrl+item.s_img"></a></li>
+              <li v-for="(item,index) in sayImg"><a  @click="navTo('/sayInfo', item.s_id)" v-if="item.s_img != null"><img :src="baseUrl+item.s_img"></a></li>
             </ul>
           </section>
         </div>
@@ -65,16 +65,8 @@
                 }
             })
           },
-          //时间戳转换成时间
-          timestampToTime (time) {
-             var date = new Date(time * 1000);
-             var year = date.getFullYear() + '-';
-             var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-             var day = date.getDate() + ' ';
-             return year + month + day;
-          },
-          navTo(id){
-            this.$router.push({ path: '/sayInfo', query: {id}});
+          navTo(path, id){
+            this.$router.push({ path, query: {id}});
           }
         }
     }

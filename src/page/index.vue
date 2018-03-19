@@ -13,8 +13,8 @@
               <p>职业：{{info.profession}}</p>
               <p>QQ：{{info.qq}}</p>
               <ul class="linkmore">
-                <li><a @click="navTo('/board')" class="talk" title="给我留言"></a></li>
-                <li><a @click="navTo('/abouts')" class="address" title="关于我"></a></li>
+                <li><a @click="pageTo('/board')" class="talk" title="给我留言"></a></li>
+                <li><a @click="pageTo('/abouts')" class="address" title="关于我"></a></li>
                 <!--<li><a href="/" class="email" title="给我写信"></a></li>-->
                 <!--<li><a href="/" class="photos" title="生活照片"></a></li>-->
                 <li><a href="/" class="heart" title="关注我"></a></li>
@@ -29,7 +29,7 @@
                     <div class="arrow_box">
                       <div class="ti"></div>
                       <div class="ci"></div>
-                      <h2 class="titles"><a @click="artDetail(item.a_id)" target="_blank">{{item.a_name}}</a></h2>
+                      <h2 class="titles"><a @click="artDetail(item.a_id)" target="_blank" class="cur">{{item.a_name}}</a></h2>
                       <ul class="textinfo">
                         <a href="/"><img :src="baseUrl+item.a_img"></a>
                         <p> {{item.a_desc}}</p>
@@ -90,15 +90,6 @@
                    this.info = res[1].data[0];
                 }
              })
-           },
-           //时间戳转换成时间
-           timestampToTime (time) {
-
-               var date = new Date(time * 1000);
-               var year = date.getFullYear() + '-';
-               var month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-               var day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' ';
-               return year + month + day;
            },
            artDetail(id){
               this.$router.push({ path: '/artInfo', query: {id}});
