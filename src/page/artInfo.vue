@@ -59,7 +59,7 @@
                              <img :src="baseUrl+item.ac_img" class="logo">
                              <div class="lCont">
                                 <p class="p1">
-                                  <span class="s1"><b class="name">{{item.ac_name}}</b>[{{item.ac_ip}}]</span>
+                                  <span class="s1"><b class="name">{{item.ac_name}}</b>[{{item.ac_city}}]</span>
                                   <span class="s2">{{item.ac_time}}</span>
                                 </p>
                                 <p class="p2" v-html="emoji(item.ac_content)"></p>
@@ -89,9 +89,9 @@
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
-    import vueEmoji from '../components/emoji.vue';
-    import { artDetail, prevArt, nextArt, addArtHit, userArtComment, getAllUser} from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import vueEmoji from '@/components/emoji.vue';
+    import { artDetail, prevArt, nextArt, addArtHit, userArtComment, getAllUser} from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
        data(){
          return {

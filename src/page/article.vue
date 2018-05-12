@@ -56,8 +56,8 @@
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
     import vPagination from './public/pagination';
-    import { getArtList, getCat, artCatList, getInfo } from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import { getArtList, getCat, artCatList, getInfo } from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
        data(){
           return {

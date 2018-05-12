@@ -29,11 +29,11 @@
                     </div>   
                     <div class="nextpage" v-if="next">
                         <b>上一篇:</b>
-                        <a @click="ArtTo(next.l_id)">{{next.l_name}}</a>
+                        <a @click="LogTo(next.l_id)">{{next.l_name}}</a>
                     </div>
                     <div class="nextpage" v-if="prev">
                           <b>下一篇:</b>
-                          <a @click="ArtTo(prev.l_id)">{{prev.l_name}}</a>
+                          <a @click="LogTo(prev.l_id)">{{prev.l_name}}</a>
                     </div>
                     <div class="cont">
                      <el-input type="textarea" :autosize="{ minRows: 10, maxRows: 20}" placeholder="请输入内容" resize="none" v-model="lc_content"></el-input>
@@ -59,7 +59,7 @@
                              <img :src="baseUrl+item.lc_img" class="logo">
                              <div class="lCont">
                                 <p class="p1">
-                                  <span class="s1"><b class="name">{{item.lc_name}}</b>[{{item.lc_ip}}]</span>
+                                  <span class="s1"><b class="name">{{item.lc_name}}</b>[{{item.lc_city}}]</span>
                                   <span class="s2">{{item.lc_time}}</span>
                                 </p>
                                 <p class="p2" v-html="emoji(item.lc_content)"></p>
@@ -89,9 +89,9 @@
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
-    import vueEmoji from '../components/emoji.vue';
-    import { logDetail, prevLog, nextLog, getAllLogUser, addLogHit, userLogComment} from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import vueEmoji from '@/components/emoji.vue';
+    import { logDetail, prevLog, nextLog, getAllLogUser, addLogHit, userLogComment} from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
        data(){
           return {

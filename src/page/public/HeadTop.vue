@@ -10,7 +10,7 @@
   </div>
 </template>
 <script type="text/javascript">
-   import {getInfo} from "../../api/getData";
+   import {getInfo} from "@/api/getData";
    export default{
       data(){
         return {

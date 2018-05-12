@@ -29,8 +29,8 @@
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
     import vPagination from './public/pagination';
-    import { getSayList } from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import { getSayList } from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
         data(){
             return {

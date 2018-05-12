@@ -29,7 +29,7 @@
                              <img :src="baseUrl+item.b_img" class="logo">
                              <div class="lCont">
                                 <p class="p1">
-                                  <span class="s1"><b class="name">{{item.b_name}}</b>[{{item.b_ip}}]</span>
+                                  <span class="s1"><b class="name">{{item.b_name}}</b>[{{item.b_city}}]</span>
                                   <span class="s2">{{item.b_time}}</span>
                                 </p>
                                 <p class="p2" v-html="emoji(item.b_content)"></p>
@@ -56,13 +56,13 @@
     </div>
 </template>
 
-<script>
+<script type="text/javascript">
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
-    import vueEmoji from '../components/emoji.vue';
-    import {getUserComment, userBoardComment} from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import vueEmoji from '@/components/emoji.vue';
+    import {getUserComment, userBoardComment} from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
         data(){
             return {
@@ -107,6 +107,7 @@
                 data.b_img = '/public/static/default/'+ ran +'.png';
                 data.b_content = this.b_content;
                 var res = JSON.parse(await userBoardComment(data));
+                console.log(res)
                 if(res.errcode == 0){
                    var res = JSON.parse(await getUserComment({num:0, page:10}));
                    if(res.errcode == 0){

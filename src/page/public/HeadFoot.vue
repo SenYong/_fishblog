@@ -5,7 +5,7 @@
           <div class="link">
             <h2>友情链接</h2>
             <ul>
-              <li><a href="/">小鱼博客1.0版本</a></li>
+              <li><a href="http://www.fishblog.com">小鱼博客1.0版本</a></li>
             </ul>
           </div>
           <div class="visitors">
@@ -27,44 +27,38 @@
           </section>
         </div>
         <div class="footer-bottom">
-          <p>Copyright 2018 Design by <a href="http://www.yangqq.com">小鱼博客</a></p>
+          <p>Copyright 2018 Design by <a href="http://www.fishblogs.com">小鱼博客</a></p>
         </div>
     </footer>
   </div>
 </template>
-<script>
+<script type="text/javascript">
     import { newArtComment, getSayList } from "../../api/getData";
-    import { baseUrl } from "../../config/env"
+    import { baseUrl } from "@/config/env"
     export default{
         data(){
-            return {
-               newArt: [],
-               baseUrl,
-               num: 0,
-               page: 9,
-               sayImg: []
-            }
+          return {
+             baseUrl,
+             num: 0,
+             page: 9,
+          }
+        },
+        computed: {
+          newArt() { return this.$store.getters.newArt },
+          sayImg() { return this.$store.getters.sayImg }
         },
         created(){
-          this.init(this.num, this.page);
+          if(Array.prototype.isPrototypeOf(this.$store.getters.newArt) && this.$store.getters.newArt){
+            this.$store.dispatch('newComment')
+          }
+          if(Array.prototype.isPrototypeOf(this.$store.getters.sayImg) && this.$store.getters.sayImg){
+            this.$store.dispatch('newSayImg', {
+              num: this.num,
+              page: this.page
+            })
+          }
         },
         methods:{
-          async init(num, page){
-            Promise.all([newArtComment(), getSayList({num, page})]).then(res => {
-                for(let i = 0; i < res.length; i++){
-                    res[i] = JSON.parse(res[i]);
-                }
-                if(res[0].errcode == 0){
-                   for(let i = 0; i < res[0].data.length; i++){
-                      res[0].data[i]["ac_time"] = this.timestampToTime(res[0].data[i]["ac_time"]);
-                   }
-                   this.newArt = res[0].data;
-                }
-                if(res[1].errcode == 0){
-                   this.sayImg = res[1].data;
-                }
-            })
-          },
           navTo(path, id){
             this.$router.push({ path, query: {id}});
           }

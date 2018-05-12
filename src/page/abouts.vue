@@ -43,8 +43,8 @@
 <script type="text/javascript">
     import headTop from './public/HeadTop';
     import headFoot from './public/HeadFoot';
-    import { baseUrl } from '../config/env';
-    import { getInfo, addAboutHit, getSayList } from '../api/getData';
+    import { baseUrl } from '@/config/env';
+    import { getInfo, addAboutHit, getSayList } from '@/api/getData';
     export default{
         data(){
             return {

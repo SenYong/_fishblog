@@ -19,7 +19,7 @@
     </ul>
   </nav>
 </template>
-<script type="es6">
+<script type="text/javascript">
   export default{
     data(){
       return {

@@ -32,7 +32,7 @@
                       <h2 class="titles"><a @click="logTo(item.l_id)" target="_blank">{{item.l_name}}</a></h2>
                       <ul class="textinfo">
                         <a href="/"><img :src="baseUrl+item.l_img"></a>
-                        <p> {{item.l_desc}}</p>
+                        <p>{{item.l_desc}}</p>
                       </ul>
                       <ul class="details">
                         <li class="likes"><a href="#">{{item.l_hit}}</a></li>
@@ -56,8 +56,8 @@
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
     import vPagination from './public/pagination';
-    import { getLogList, getInfo } from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import { getLogList, getInfo } from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
        data(){
          return {

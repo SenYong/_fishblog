@@ -15,8 +15,6 @@
               <ul class="linkmore">
                 <li><a @click="pageTo('/board')" class="talk" title="给我留言"></a></li>
                 <li><a @click="pageTo('/abouts')" class="address" title="关于我"></a></li>
-                <!--<li><a href="/" class="email" title="给我写信"></a></li>-->
-                <!--<li><a href="/" class="photos" title="生活照片"></a></li>-->
                 <li><a href="/" class="heart" title="关注我"></a></li>
               </ul>
             </div>
@@ -44,18 +42,19 @@
                 </ul>
                 <!--bloglist end-->
                 <head-right></head-right>
-            </div>
+           </div>
         </div>
         <head-foot></head-foot>
     </div>
 </template>
 
 <script type="text/javascript">
+    import { mapActions } from 'vuex'
     import headTop from './public/HeadTop';
     import headRight from './public/HeadRight';
     import headFoot from './public/HeadFoot';
-    import { getArticle, newArt, newLog, newSay, getInfo } from '../api/getData';
-    import { baseUrl } from '../config/env';
+    import { getArticle } from '@/api/getData';
+    import { baseUrl } from '@/config/env';
     export default{
         data(){
             return {
@@ -63,40 +62,38 @@
                 baseUrl,
                 page: 8,
                 num: 0,
-                info: "",
                 total: 150,     // 记录总条数
                 display: 10,   // 每页显示条数
                 current: 1,   // 当前的页数
             }
         },
         components: {headTop, headRight, headFoot},
+        computed: {
+          info() { return this.$store.getters.info }
+        },
         created(){
            this.init(this.num, this.page);
         },
         methods: {
-           async init(num, page){
-             Promise.all([getArticle({num, page}), getInfo()]).then(res => {
+          async init(num, page){
+             Promise.all([getArticle({num, page})]).then(res => {
                 for(let i = 0; i < res.length; i++){
                    res[i] = JSON.parse(res[i]);
                 }
                 if(res[0].errcode == 0){
-
                     for(let i = 0; i < res[0].data.length; i++){
                         res[0].data[i]["a_time"] = this.timestampToTime(res[0].data[i]["a_time"]);
                     }
                     this.list = res[0].data;
                 }
-                if(res[1].errcode == 0){
-                   this.info = res[1].data[0];
-                }
              })
-           },
-           artDetail(id){
+          },
+          artDetail(id){
               this.$router.push({ path: '/artInfo', query: {id}});
-           },
-           navTo (path){
-              this.$router.push(path);
-           }
+          },
+          navTo (path){
+             this.$router.push(path);
+          }
         }
     }
 </script>
