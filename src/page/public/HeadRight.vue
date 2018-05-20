@@ -18,7 +18,7 @@
           <div class="clicks">
             <h2>最新日志</h2>
             <ol>
-              <li v-for="(item, index) in log"><span><a class="cur" @click="navTo('/journalInfo', item.l_id)">慢生活</a></span><a class="cur">{{item.l_name}}</a></li>
+              <li v-for="(item, index) in log" @click="navTo('/journalInfo', item.l_id)"><span><a class="cur">慢生活</a></span><a class="cur">{{item.l_name}}</a></li>
             </ol>
           </div>
           <div class="search">
@@ -101,6 +101,7 @@
           this.navBar[index].bool = true;
         },
         navTo(path,id){
+          this.$emit('select', id);
           this.$router.push({path, query:{id}})
         }
       } 

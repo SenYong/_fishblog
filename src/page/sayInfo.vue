@@ -65,7 +65,7 @@
                   </div>
                </div><!--topnews-->
             </div><!--l_box f_l-->
-            <head-right></head-right>
+            <head-right @select="select"></head-right>
         </article>
         <div class="clear"></div>
         <head-foot></head-foot>
@@ -180,6 +180,9 @@
                        this.comment = res[3].data;
                     }
                 })
+            },
+            select(id){
+              this.LogTo(id)
             }
         }
     }

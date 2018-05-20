@@ -17,12 +17,12 @@
                         <p>
                           <strong>版权声明：</strong>
                           本站原创文章，于{{artData.a_time}}，由
-                          <a href="https://www.yezismile.com/detail/5.html" target="_blank">{{artData.a_root}}</a>
+                          <a>{{artData.a_root}}</a>
                           发表
                         </p>
                         <p class="p-hidden">
                           <strong>转载请注明：</strong>
-                          <a href="https://www.yezismile.com/detail/459.html" target="_self">{{artData.a_name}}</a>
+                          <a>{{artData.a_name}}</a>
                            | 
                           <a href="https://www.fishblog.top/">小鱼博客</a>
                         </p>
@@ -79,7 +79,7 @@
                   </div>
                </div><!--topnews-->
             </div><!--l_box f_l-->
-            <head-right></head-right>
+            <head-right @select="select"></head-right>
         </article>
         <div class="clear"></div>
         <head-foot></head-foot>
@@ -194,6 +194,10 @@
                this.$message.error(res.msg);
             }
             this.ac_content = ''
+          },
+          //选择
+          select(id){
+            this.ArtTo(id)
           }
        }
     }
